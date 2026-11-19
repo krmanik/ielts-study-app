@@ -62,7 +62,8 @@ files are uploaded (the folder keeps its own git store, `site/.git`, about 470 M
   The tests are Cambridge's copyrighted material: keep the address to yourself.
 - **Progress goes through GitHub**, since the app there cannot reach the Mac. Every device reads and
   writes one file, `test-centre.json` on the branch `progress-sync`, and merges the others' work
-  (`js/ghsync.js`): when the app opens, when a test is finished, and every few minutes in between.
+  (`js/ghsync.js`). It is read when the app opens; it is written only when you press **Exchange now**
+  (Settings → GitHub on the Mac, More → Exchange through GitHub now on the phone) — never by itself.
   GitHub refuses a write that was not based on the latest version, so the writer merges and tries again.
   - **The Mac needs nothing set up.** `serve.py` carries the file with git and the login git already
     has (`/api/gitsync`; it builds the commit with git's plumbing and never touches the working tree).

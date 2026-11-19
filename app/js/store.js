@@ -1,5 +1,5 @@
 // All progress lives in localStorage (one JSON blob). Recordings live in IndexedDB (see db.js).
-// A copy is kept on disk by serve.py (../progress/study-suite.json) and committed to git, see sync.js.
+// A copy is kept on disk by serve.py (../progress/study-suite.json), see sync.js. Nothing is committed by itself.
 import { dayKey } from './util.js';
 import { makeSync } from './sync.js';
 
@@ -47,7 +47,7 @@ export const initSync = () => sync.pull();
 export const syncStatus = () => sync.status();
 
 let saveTimer;
-/** `commit`: a message for git — the server commits the saved progress under it straight away. */
+/** `commit`: a name for this save (a finished test); the server no longer commits anything. */
 export function save(commit = null) {
   clearTimeout(saveTimer);
   state.savedAt = Date.now();

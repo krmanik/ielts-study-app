@@ -4,8 +4,8 @@
 Like `python3 -m http.server`, but supports HTTP Range requests so the browser can seek in the
 MP3s (needed for rewind/forward and A–B looping), and follows the `audio` symlink.
 
-It also keeps a copy of your progress on disk, in ../progress, and commits it to git so results
-are never lost with the browser's storage:
+It also keeps a copy of your progress on disk, in ../progress, so results are never lost with the
+browser's storage. Nothing is committed or pushed by itself: commit the progress folder when you want to.
 
     GET/PUT /api/state/<name>    one JSON document per app (study-suite, test-centre)
     GET/PUT /api/rec/<id>        speaking recordings
@@ -23,7 +23,6 @@ PROGRESS = os.environ.get('IELTS_PROGRESS') or os.path.join(REPO, 'progress')   
 PORT = next((int(a) for a in sys.argv[1:] if a.isdigit()), 8765)
 NAME = re.compile(r'^[a-z0-9][a-z0-9-]{0,40}$')
 REC_EXT = {'audio/webm': 'webm', 'audio/mp4': 'm4a', 'audio/ogg': 'ogg', 'audio/wav': 'wav', 'audio/mpeg': 'mp3'}
-AUTOSAVE_IDLE = 300          # seconds without changes before unsaved progress is committed
 MAX_BODY = 60 * 1024 * 1024
 PHONE = '--phone' in sys.argv
 STATE_LOCK = threading.Lock()   # one writer at a time for /api/state, so revisions cannot be skipped
@@ -239,13 +238,8 @@ PAIR_PAGE = """<!doctype html><html lang="en"><meta charset="utf-8">
 # ---------------------------------------------------------------- progress on disk + git history
 
 class Saver:
-    """Writes progress files and commits them to git (only the progress folder, never other work)."""
-
-    def __init__(self):
-        self.lock = threading.Lock()
-        self.timer = None
-        self.pending = None    # commit message waiting for the timer; None = routine autosave
-        self.last = None       # (time, message) of the last commit, for the settings page
+    """Writes progress files to ../progress. It never commits or pushes: what goes into git, and when,
+    is for you to decide (git add progress && git commit)."""
 
     def write(self, rel, data, message=None):
         path = os.path.join(PROGRESS, rel)
@@ -259,38 +253,6 @@ class Saver:
                 write_results(json.loads(data))
             except Exception as e:                      # the summary is a convenience, never block a save on it
                 print('results summary failed:', e)
-        self.schedule(message)
-
-    def schedule(self, message):
-        with self.lock:
-            if self.timer:
-                self.timer.cancel()
-            self.pending = message or self.pending
-            delay = 1.5 if self.pending else AUTOSAVE_IDLE      # a named save (a finished test) is committed at once
-            self.timer = threading.Timer(delay, self.commit)
-            self.timer.daemon = True
-            self.timer.start()
-
-    def commit(self, message=None):
-        with self.lock:
-            message = message or self.pending or 'Autosave progress'
-            self.pending = None
-            if self.timer:
-                self.timer.cancel(); self.timer = None
-            try:
-                git = lambda *a: subprocess.run(['git', '-C', REPO, *a], capture_output=True, text=True, timeout=30)
-                if git('rev-parse', '--is-inside-work-tree').stdout.strip() != 'true':
-                    return
-                git('add', '-A', '--', 'progress')
-                if not git('status', '--porcelain', '--', 'progress').stdout.strip():
-                    return
-                r = git('commit', '-q', '-m', message, '--', 'progress')
-                if r.returncode == 0:
-                    self.last = (datetime.datetime.now().isoformat(timespec='seconds'), message)
-                else:
-                    print('git commit failed:', (r.stderr or r.stdout).strip())
-            except (OSError, subprocess.SubprocessError) as e:
-                print('git not available:', e)
 
 
 SAVER = Saver()
@@ -392,10 +354,10 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                     doc['rev'] = (cur.get('rev', 0) if isinstance(cur, dict) else 0) + 1
                 data = json.dumps(doc, ensure_ascii=False, indent=1, sort_keys=True).encode() + b'\n'
                 SAVER.write(name + '.json', data, message)
-            return self.reply(200, {'ok': True, 'lastCommit': SAVER.last, 'rev': doc.get('rev') if isinstance(doc, dict) else None})
+            return self.reply(200, {'ok': True, 'rev': doc.get('rev') if isinstance(doc, dict) else None})
         ext = REC_EXT.get((self.headers.get('Content-Type') or '').split(';')[0].strip(), 'webm')
         SAVER.write(os.path.join('recordings', f'{name}.{ext}'), body, message)
-        self.reply(200, {'ok': True, 'lastCommit': SAVER.last})
+        self.reply(200, {'ok': True})
 
     def gitsync(self, method):
         """The progress file on GitHub, for this Mac's browser only (see GITSYNC)."""
@@ -637,5 +599,3 @@ if __name__ == '__main__':
         srv.serve_forever()
     except KeyboardInterrupt:
         pass
-    finally:
-        SAVER.commit()      # anything still waiting for the idle timer

@@ -5,13 +5,9 @@
 # from the Mac, and leaves the media there alone. See README.md, "Publish".
 name: Publish
 
+# Runs only when started by hand (Actions -> Publish -> Run workflow, or `gh workflow run Publish`):
+# nothing is committed to gh-pages by itself on a push.
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'app/**'
-      - 'writing/**'
-      - '.github/workflows/publish.yml'
   workflow_dispatch:
 
 permissions:

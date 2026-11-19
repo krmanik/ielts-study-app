@@ -16,7 +16,7 @@ A private, offline-first study app for the IELTS Academic test, in one place:
 ## Start
 
 - Mac: double-click **`Start IELTS Suite.command`** → <http://localhost:8765> (Study Suite) and
-  <http://localhost:8765/cbt/> (Test Centre). Progress is saved to `progress/` and committed to git.
+  <http://localhost:8765/cbt/> (Test Centre). Progress is saved to `progress/`; nothing is committed or pushed by itself.
 - Phone on the same Wi-Fi: **`Start IELTS for Phone.command`** (see `app/cbt/README.md`, "On a phone").
 
 The source books and recordings are **not** in this repository (see `.gitignore`); put your own copies
@@ -64,10 +64,10 @@ scrolls sideways or stays empty, and checks the Learn interactions.
 pictures and pushes it to the `gh-pages` branch. GitHub Actions cannot do that part: the recordings
 and pictures are not in git.
 
-`.github/workflows/publish.yml` does the rest on every push to `main` that touches the app or
-`writing/`: runs the unit tests, builds the Anki decks and `learn.json`, then copies the changed app
-code and the decks onto `gh-pages`, keeping the media already there. It can also be started by hand
-(Actions → Publish → Run workflow). Nothing is published if `gh-pages` does not exist yet — run the
+`.github/workflows/publish.yml` does the rest, only when you start it (Actions → Publish → Run
+workflow, or `gh workflow run Publish`): runs the unit tests, builds the Anki decks and `learn.json`,
+then copies the changed app code and the decks onto `gh-pages`, keeping the media already there.
+A push to `main` publishes nothing by itself. Nothing is published if `gh-pages` does not exist yet — run the
 Mac script once first.
 
 ## Content, copyright and disclaimer

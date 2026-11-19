@@ -24,7 +24,7 @@ export function render(page) {
     <div class="card stack" style="max-width:640px;margin-top:16px">
       <h3 style="margin:0">Backup</h3>
       <p class="muted" style="margin:0">${syncStatus().online
-    ? 'Your results are saved in this browser <b>and on disk</b> in the <code>progress</code> folder next to the app. Every finished test is committed to git, so earlier results can always be recovered (<code>git log progress</code>).'
+    ? 'Your results are saved in this browser <b>and on disk</b> in the <code>progress</code> folder next to the app. Nothing is committed to git by itself — commit the <code>progress</code> folder yourself when you want a saved point.'
     : 'Your results are stored in this browser only — the app was not opened through <b>Start IELTS Suite.command</b>, so nothing is being saved to disk.'}</p>
       <div class="row"><button class="btn" id="export">Export results</button>
       <label class="btn">Import… <input type="file" id="import" accept=".json" hidden></label>
@@ -87,7 +87,7 @@ function githubCard(box) {
     box.innerHTML = `<h3 style="margin:0">GitHub — progress shared with the app on GitHub Pages <span class="pill ${state[0]}">${state[1]}</span></h3>
       <p class="muted" style="margin:0">${g.error ? `<b style="color:var(--bad)">${g.error}</b><br>` : ''}
       This Mac and your phone meet on GitHub: the file <code>test-centre.json</code> on the branch <code>progress-sync</code>${g.repo ? ` of <b>${g.repo}</b>` : ''}.
-      What the phone did is merged in when this page opens; what you do here goes out when a test is finished and every few minutes.
+      What the phone did is merged in when this page opens; what you do here goes to GitHub only when you press <b>Exchange now</b>.
       ${g.via === 'git' ? 'The Mac uses the login git already has — nothing to set up here. On the phone: <b>More → GitHub</b>, paste a token once.' : ''}</p>
       <div class="row"><button class="btn" id="gh-now">Exchange now</button>${g.via === 'token' ? '<button class="btn ghost" id="gh-off">Disconnect</button>' : ''}
       <span class="muted" style="font-size:13px">${g.last ? 'last exchanged ' + new Date(g.last).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ''}</span></div>`;
@@ -95,7 +95,7 @@ function githubCard(box) {
   draw();
   box.onclick = async (e) => {
     const b = e.target.closest('button');
-    if (b?.id === 'gh-now') { b.disabled = true; b.textContent = 'Exchanging…'; await syncNow(); toast(syncStatus().gh.error || (syncStatus().gh.online ? 'Exchanged with GitHub' : 'GitHub is out of reach — it will be tried again')); }
+    if (b?.id === 'gh-now') { b.disabled = true; b.textContent = 'Exchanging…'; await syncNow(); toast(syncStatus().gh.error || (syncStatus().gh.online ? 'Exchanged with GitHub' : 'GitHub is out of reach — try again later')); }
     if (b?.id === 'gh-off') disconnectGithub();
     draw();
   };

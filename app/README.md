@@ -21,9 +21,8 @@ progress/RESULTS.md           readable list of finished Test Centre attempts
 progress/recordings/          speaking recordings
 ```
 
-Every finished test is committed to git straight away (`Result: Cambridge 15 Test 2 Reading — 31/40,
-band 7.0`); other changes are committed after five quiet minutes and when the server stops. So
-`git log progress` is the history of your results, and clearing the browser or moving to another
+Nothing is committed or pushed by itself. When you want a saved point in git, commit the folder
+yourself (`git add progress && git commit -m "Progress"`). Clearing the browser or moving to another
 browser loses nothing — the app loads the copy on disk when it is newer. The Test Centre's copy is
 shared with the phone: what each side did is merged, never replaced (`cbt/js/merge.js`).
 

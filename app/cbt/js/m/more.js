@@ -19,11 +19,11 @@ function githubCard() {
   if (g.on) {
     return `<div class="card m-stack m-gh">
       <div class="m-status ${g.error ? 'warn' : g.online ? 'good' : 'idle'}"><i></i><span><b>GitHub: ${esc(g.repo)}</b>
-        <small>${g.error ? esc(g.error) : 'Progress is exchanged through the branch <code>progress-sync</code> — when the app opens, when a test is finished, and every few minutes in between.'}</small></span></div>
+        <small>${g.error ? esc(g.error) : 'Progress is read from the branch <code>progress-sync</code> when the app opens, and sent to it only when you press <b>Exchange through GitHub now</b>.'}</small></span></div>
       <button class="btn block ghost" id="gh-off">Disconnect GitHub</button></div>`;
   }
   return `<div class="card m-stack m-gh">
-    <p class="muted" style="margin:0">${STATIC ? 'To keep this device and your Mac in step, both exchange progress through your GitHub repository. The Mac does it by itself; here it takes a token, once.'
+    <p class="muted" style="margin:0">${STATIC ? 'To keep this device and your Mac in step, both exchange progress through your GitHub repository when you press Exchange now. Here it takes a token, once.'
     : 'Optional: also exchange progress through your GitHub repository, for when the app is opened from GitHub Pages instead of from your Mac.'}</p>
     <label>Token<input type="password" id="gh-token" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="github_pat_…"></label>
     <label>Repository<input type="text" id="gh-repo" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="owner/name" value="${esc(guessRepo())}"></label>
