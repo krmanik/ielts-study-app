@@ -1,0 +1,554 @@
+{
+ "books": [
+  {
+   "id": "11",
+   "name": "Cambridge IELTS 11",
+   "tests": [
+    {
+     "id": "11-1",
+     "n": 1,
+     "label": "Test 1",
+     "titles": [
+      "Crop-growing skyscrapers",
+      "The Falkirk Wheel",
+      "Reducing the Effects of Climate Change"
+     ],
+     "audio": true
+    },
+    {
+     "id": "11-2",
+     "n": 2,
+     "label": "Test 2",
+     "titles": [
+      "Raising the Mary Rose",
+      "What destroyed the civilisation of Easter Island?",
+      "Neuroaesthetics"
+     ],
+     "audio": true
+    },
+    {
+     "id": "11-3",
+     "n": 3,
+     "label": "Test 3",
+     "titles": [
+      "The Story of Silk",
+      "Great Migrations",
+      "Preface to 'How the other half thinks: Adventures in mathematical reasoning'"
+     ],
+     "audio": true
+    },
+    {
+     "id": "11-4",
+     "n": 4,
+     "label": "Test 4",
+     "titles": [
+      "Research using twins",
+      "An Introduction to Film Sound",
+      "'This Marvellous Invention'"
+     ],
+     "audio": true
+    }
+   ]
+  },
+  {
+   "id": "12",
+   "name": "Cambridge IELTS 12",
+   "tests": [
+    {
+     "id": "12-1",
+     "n": 1,
+     "label": "Test 5",
+     "titles": [
+      "Cork",
+      "Collecting As a Hobby",
+      "What's the purpose of gaining knowledge?"
+     ],
+     "audio": true
+    },
+    {
+     "id": "12-2",
+     "n": 2,
+     "label": "Test 6",
+     "titles": [
+      "The risks agriculture faces in developing countries",
+      "The Lost City",
+      "The Benefits of Being Bilingual"
+     ],
+     "audio": true
+    },
+    {
+     "id": "12-3",
+     "n": 3,
+     "label": "Test 7",
+     "titles": [
+      "Flying tortoises",
+      "The Intersection of Health Sciences and Geography",
+      "Music and the emotions"
+     ],
+     "audio": true
+    },
+    {
+     "id": "12-4",
+     "n": 4,
+     "label": "Test 8",
+     "titles": [
+      "The History of Glass",
+      "Bring back the big cats",
+      "UK companies need more effective boards of directors"
+     ],
+     "audio": true
+    }
+   ]
+  },
+  {
+   "id": "13",
+   "name": "Cambridge IELTS 13",
+   "tests": [
+    {
+     "id": "13-1",
+     "n": 1,
+     "label": "Test 1",
+     "titles": [
+      "Case Study: Tourism New Zealand website",
+      "Why being bored is stimulating – and useful, too",
+      "Artificial artists"
+     ],
+     "audio": true
+    },
+    {
+     "id": "13-2",
+     "n": 2,
+     "label": "Test 2",
+     "titles": [
+      "Bringing cinnamon to Europe",
+      "Oxytocin",
+      "Making the Most of Trends"
+     ],
+     "audio": true
+    },
+    {
+     "id": "13-3",
+     "n": 3,
+     "label": "Test 3",
+     "titles": [
+      "The coconut palm",
+      "How baby talk gives infant brains a boost",
+      "Whatever happened to the Harappan Civilisation?"
+     ],
+     "audio": true
+    },
+    {
+     "id": "13-4",
+     "n": 4,
+     "label": "Test 4",
+     "titles": [
+      "Cutty Sark: the fastest sailing ship of all time",
+      "Saving the Soil",
+      "Book Review: The Happiness Industry"
+     ],
+     "audio": true
+    }
+   ]
+  },
+  {
+   "id": "14",
+   "name": "Cambridge IELTS 14",
+   "tests": [
+    {
+     "id": "14-1",
+     "n": 1,
+     "label": "Test 1",
+     "titles": [
+      "The Importance of Children's Play",
+      "The growth of bike-sharing schemes around the world",
+      "Motivational factors and the hospitality industry"
+     ],
+     "audio": true
+    },
+    {
+     "id": "14-2",
+     "n": 2,
+     "label": "Test 2",
+     "titles": [
+      "Alexander Henderson (1831-1913)",
+      "Back to the future of skyscraper design",
+      "Why companies should welcome disorder"
+     ],
+     "audio": true
+    },
+    {
+     "id": "14-3",
+     "n": 3,
+     "label": "Test 3",
+     "titles": [
+      "The concept of intelligence",
+      "Saving bugs to find new drugs",
+      "The power of play"
+     ],
+     "audio": true
+    },
+    {
+     "id": "14-4",
+     "n": 4,
+     "label": "Test 4",
+     "titles": [
+      "The secret of staying young",
+      "Why zoos are good",
+      "Marine debris"
+     ],
+     "audio": true
+    }
+   ]
+  },
+  {
+   "id": "15",
+   "name": "Cambridge IELTS 15",
+   "tests": [
+    {
+     "id": "15-1",
+     "n": 1,
+     "label": "Test 1",
+     "titles": [
+      "Nutmeg - a valuable spice",
+      "Driverless cars",
+      "What is exploration?"
+     ],
+     "audio": true
+    },
+    {
+     "id": "15-2",
+     "n": 2,
+     "label": "Test 2",
+     "titles": [
+      "Could urban engineers learn from dance?",
+      "Should we try to bring extinct species back to life?",
+      "Having a laugh"
+     ],
+     "audio": true
+    },
+    {
+     "id": "15-3",
+     "n": 3,
+     "label": "Test 3",
+     "titles": [
+      "Henry Moore (1898-1986)",
+      "The Desolenator: producing clean water",
+      "Why fairy tales are really scary tales"
+     ],
+     "audio": true
+    },
+    {
+     "id": "15-4",
+     "n": 4,
+     "label": "Test 4",
+     "titles": [
+      "The return of the huarango",
+      "Silbo Gomero – the whistle 'language' of the Canary Islands",
+      "Environmental practices of big businesses"
+     ],
+     "audio": true
+    }
+   ]
+  },
+  {
+   "id": "16",
+   "name": "Cambridge IELTS 16",
+   "tests": [
+    {
+     "id": "16-1",
+     "n": 1,
+     "label": "Test 1",
+     "titles": [
+      "Why we need to protect polar bears",
+      "The Step Pyramid of Djoser",
+      "The future of work"
+     ],
+     "audio": true
+    },
+    {
+     "id": "16-2",
+     "n": 2,
+     "label": "Test 2",
+     "titles": [
+      "The White Horse of Uffington",
+      "I contain multitudes",
+      "How to make wise decisions"
+     ],
+     "audio": true
+    },
+    {
+     "id": "16-3",
+     "n": 3,
+     "label": "Test 3",
+     "titles": [
+      "Roman shipbuilding and navigation",
+      "Climate change reveals ancient artefacts in Norway's glaciers",
+      "Plant 'thermometer' triggers springtime growth by measuring night-time heat"
+     ],
+     "audio": true
+    },
+    {
+     "id": "16-4",
+     "n": 4,
+     "label": "Test 4",
+     "titles": [
+      "Roman tunnels",
+      "Changes in reading habits",
+      "Attitudes towards Artificial Intelligence"
+     ],
+     "audio": true
+    }
+   ]
+  },
+  {
+   "id": "17",
+   "name": "Cambridge IELTS 17",
+   "tests": [
+    {
+     "id": "17-1",
+     "n": 1,
+     "label": "Test 1",
+     "titles": [
+      "The development of the London underground railway",
+      "Stadiums: past, present and future",
+      "To catch a king"
+     ],
+     "audio": true
+    },
+    {
+     "id": "17-2",
+     "n": 2,
+     "label": "Test 2",
+     "titles": [
+      "The Dead Sea Scrolls",
+      "A second attempt at domesticating the tomato",
+      "Insight or evolution?"
+     ],
+     "audio": true
+    },
+    {
+     "id": "17-3",
+     "n": 3,
+     "label": "Test 3",
+     "titles": [
+      "The thylacine",
+      "Palm oil",
+      "Building the Skyline: The Birth and Growth of Manhattan's Skyscrapers"
+     ],
+     "audio": true
+    },
+    {
+     "id": "17-4",
+     "n": 4,
+     "label": "Test 4",
+     "titles": [
+      "Bats to the rescue",
+      "Does education fuel economic growth?",
+      "Timur Gareyev - blindfold chess champion"
+     ],
+     "audio": true
+    }
+   ]
+  },
+  {
+   "id": "18",
+   "name": "Cambridge IELTS 18",
+   "tests": [
+    {
+     "id": "18-1",
+     "n": 1,
+     "label": "Test 1",
+     "titles": [
+      "Urban farming",
+      "Forest management in Pennsylvania, USA",
+      "Conquering Earth's space junk problem"
+     ],
+     "audio": true
+    },
+    {
+     "id": "18-2",
+     "n": 2,
+     "label": "Test 2",
+     "titles": [
+      "Stonehenge",
+      "Living with artificial intelligence",
+      "An ideal city"
+     ],
+     "audio": true
+    },
+    {
+     "id": "18-3",
+     "n": 3,
+     "label": "Test 3",
+     "titles": [
+      "Materials to take us beyond concrete",
+      "The steam car",
+      "The case for mixed-ability classes"
+     ],
+     "audio": true
+    },
+    {
+     "id": "18-4",
+     "n": 4,
+     "label": "Test 4",
+     "titles": [
+      "Green roofs",
+      "The growth mindset",
+      "Alfred Wegener: science, exploration and the theory of continental drift"
+     ],
+     "audio": true
+    }
+   ]
+  },
+  {
+   "id": "19",
+   "name": "Cambridge IELTS 19",
+   "tests": [
+    {
+     "id": "19-1",
+     "n": 1,
+     "label": "Test 1",
+     "titles": [
+      "How tennis rackets have changed",
+      "The pirates of the ancient Mediterranean",
+      "The persistence and peril of misinformation"
+     ],
+     "audio": true
+    },
+    {
+     "id": "19-2",
+     "n": 2,
+     "label": "Test 2",
+     "titles": [
+      "The Industrial Revolution in Britain",
+      "Athletes and stress",
+      "An inquiry into the existence of the gifted child"
+     ],
+     "audio": true
+    },
+    {
+     "id": "19-3",
+     "n": 3,
+     "label": "Test 3",
+     "titles": [
+      "Archaeologists discover evidence of prehistoric island settlers",
+      "The global importance of wetlands",
+      "Is the era of artificial speech translation upon us?"
+     ],
+     "audio": true
+    },
+    {
+     "id": "19-4",
+     "n": 4,
+     "label": "Test 4",
+     "titles": [
+      "The impact of climate change on butterflies in Britain",
+      "Deep-sea mining",
+      "The Unselfish Gene"
+     ],
+     "audio": true
+    }
+   ]
+  },
+  {
+   "id": "20",
+   "name": "Cambridge IELTS 20",
+   "tests": [
+    {
+     "id": "20-1",
+     "n": 1,
+     "label": "Test 1",
+     "titles": [
+      "The kākāpō",
+      "Mark Rowe investigates attempts to reintroduce elms to Britain",
+      "How stress affects our judgement"
+     ],
+     "audio": true
+    },
+    {
+     "id": "20-2",
+     "n": 2,
+     "label": "Test 2",
+     "titles": [
+      "Manatees",
+      "Procrastination",
+      "Invasion of the Robot Umpires"
+     ],
+     "audio": true
+    },
+    {
+     "id": "20-3",
+     "n": 3,
+     "label": "Test 3",
+     "titles": [
+      "Frozen Food",
+      "Can the planet's coral reefs be saved?",
+      "Robots and us"
+     ],
+     "audio": true
+    },
+    {
+     "id": "20-4",
+     "n": 4,
+     "label": "Test 4",
+     "titles": [
+      "Georgia O'Keeffe",
+      "Adapting to the effects of climate change",
+      "A new role for livestock guard dogs"
+     ],
+     "audio": true
+    }
+   ]
+  },
+  {
+   "id": "21",
+   "name": "Cambridge IELTS 21",
+   "tests": [
+    {
+     "id": "21-1",
+     "n": 1,
+     "label": "Test 1",
+     "titles": [
+      "The Davies Sisters",
+      "Why we need silence",
+      "Book review: The World of Sugar by Ulbe Bosma"
+     ],
+     "audio": true
+    },
+    {
+     "id": "21-2",
+     "n": 2,
+     "label": "Test 2",
+     "titles": [
+      "Do animals dream?",
+      "Mapungubwe",
+      "Artificial Intelligence"
+     ],
+     "audio": true
+    },
+    {
+     "id": "21-3",
+     "n": 3,
+     "label": "Test 3",
+     "titles": [
+      "Saving the saiga",
+      "The problems of getting around the city of Dar es Salaam",
+      "Rethinking the Past"
+     ],
+     "audio": true
+    },
+    {
+     "id": "21-4",
+     "n": 4,
+     "label": "Test 4",
+     "titles": [
+      "The problems and benefits created by the spread of the water hyacinth in Kenya",
+      "How could multilingualism benefit India's poorest schoolchildren?",
+      "The Globemakers: The Curious Story of an Ancient Craft"
+     ],
+     "audio": true
+    }
+   ]
+  }
+ ]
+}
