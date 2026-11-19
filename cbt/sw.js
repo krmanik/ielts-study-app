@@ -15,8 +15,19 @@ const OPTIONAL = ['media/m/manifest.json'];                     // sizes of the 
 const ENTRY = 'js/m/main.js';
 const IMPORT = /(?:\bfrom\s*|\bimport\s*\(\s*|\bimport\s+)(['"])(\.{1,2}\/[^'"]+)\1/g;
 
+const wait = (ms) => new Promise((done) => setTimeout(done, ms));
+
+/** A file the app needs. A request lost on the way ("Failed to fetch") is asked for again, twice, before
+ * giving up: the app is about 80 files fetched at once, and one lost request would otherwise fail the
+ * whole install. A real answer (404, 500) is not retried. */
 async function get(url) {
-  const r = await fetch(url, { cache: 'no-cache' });
+  let r;
+  for (let tries = 0; ; tries++) {
+    try { r = await fetch(url, { cache: 'no-cache' }); break; } catch (e) {
+      if (tries >= 2) throw e;
+      await wait(tries ? 1500 : 500);
+    }
+  }
   if (r.status !== 200 || r.redirected) throw Object.assign(new Error(`${url}: ${r.status}`), { status: r.status });
   return r;
 }
@@ -115,7 +126,7 @@ async function answer(e, req, url) {
     try { r = await fetch(req); } catch (err) {
       // one request lost on a poor connection must not break the screen that needs the file: ask once more
       if (req.mode === 'navigate' || req.headers.has('range')) throw err;
-      await new Promise((done) => setTimeout(done, 400));
+      await wait(400);
       r = await fetch(req.url, { cache: 'no-cache' });
     }
     // a script, style sheet or test that was not stored yet: keep it for next time
