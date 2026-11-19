@@ -1,4 +1,4 @@
-// Keeps a copy of an app's progress on disk through serve.py (/api/state/<name>), which commits it to git.
+// Keeps a copy of an app's progress on disk through serve.py (/api/state/<name>). Nothing is committed to git.
 // localStorage stays the working copy. Shared by the Study Suite and the Test Centre.
 //
 // Two ways of settling differences with the copy on disk:
@@ -84,7 +84,7 @@ export function makeSync(name, { get, adopt, merge, delay = 1500, onStatus, off 
       else if (mine > theirs) this.push();
       return true;
     },
-    /** Queue a save. With `commitMessage` the server commits to git straight away under that message. */
+    /** Queue a save to disk. With `commitMessage` (a finished test) it is written straight away. */
     push(commitMessage) {
       if (commitMessage) message = commitMessage;
       clearTimeout(timer);

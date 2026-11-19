@@ -1,5 +1,5 @@
 // All progress lives in localStorage (one JSON blob). Speaking recordings live in IndexedDB (see rec.js).
-// A copy is kept on disk by serve.py (../progress/test-centre.json) and committed to git, see ../../js/sync.js.
+// A copy is kept on disk by serve.py (../progress/test-centre.json), see ../../js/sync.js. Nothing is committed by itself.
 // The Mac and the phone both work on that copy; merge.js folds their changes together.
 import { dayKey, uid } from './util.js';
 import { makeSync } from '../../js/sync.js';
@@ -97,7 +97,7 @@ export async function connectGithub(token, repo, api) {
 export const disconnectGithub = () => gh.configure(null);
 
 let timer;
-/** `commit`: a message for git — the server commits the saved progress under it straight away. */
+/** `commit`: a name for this save (a finished test), used as the commit message when you exchange through GitHub. */
 export function save(now = false, commit = null) {
   clearTimeout(timer);
   state.savedAt = Date.now();
@@ -115,7 +115,8 @@ function repull() {
   sync.pull(); gh.pull();
 }
 // leaving the app (phone locked, tab hidden): send what is waiting, GitHub included
-document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') { writeLocal(); sync.flush(); gh.flush(); } else repull(); });
+// GitHub is written only by syncNow() ("Exchange now"), never on leaving the page
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') { writeLocal(); sync.flush(); } else repull(); });
 addEventListener('online', repull);
 
 const SKILL_NAME = { L: 'Listening', R: 'Reading', W: 'Writing', S: 'Speaking' };

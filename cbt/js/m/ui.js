@@ -16,8 +16,10 @@ export function syncInfo() {
   if (STATIC || (g.on && !s.online)) {       // no Mac behind this page: GitHub is the meeting place
     if (!g.on) return { cls: 'idle', text: 'Saved on this device', detail: 'Results are kept on this device only. Connect GitHub below and they are kept in step with your Mac.' };
     if (g.error) return { cls: 'warn', text: 'GitHub needs a look', detail: g.error + '. Results are safe on this device meanwhile.' };
-    if (g.online && navigator.onLine) return { cls: 'good', text: 'In step through GitHub', detail: `Last exchanged ${g.last ? fmtDateTime(g.last) : 'just now'}${g.pending ? ' — a few changes are waiting to go' : ''}.` };
-    return { cls: 'idle', text: 'Saved on this device', detail: 'No connection. Everything is kept on this device and exchanged through GitHub when you are online again.' };
+    if (g.online && navigator.onLine) return g.pending
+      ? { cls: 'idle', text: 'Not sent to GitHub yet', detail: `Saved on this device. Press Exchange through GitHub now (More) to send it. Last exchanged ${g.last ? fmtDateTime(g.last) : 'just now'}.` }
+      : { cls: 'good', text: 'In step through GitHub', detail: `Last exchanged ${g.last ? fmtDateTime(g.last) : 'just now'}.` };
+    return { cls: 'idle', text: 'Saved on this device', detail: 'No connection. Everything is kept on this device; exchange through GitHub when you are online again.' };
   }
   if (s.needKey) return { cls: 'warn', text: 'Phone code needed', detail: 'Your Mac is in reach but wants the phone code again. Results are safe on this device meanwhile.' };
   if (s.online) {

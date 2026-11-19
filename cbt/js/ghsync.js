@@ -4,6 +4,9 @@
 // write that was not based on the file's latest version; the writer then reads, merges and writes again,
 // so no device overwrites another.
 //
+// Reading happens by itself (when the app opens). Writing - a commit on GitHub - never does: changes are
+// only noted, and go out when you press "Exchange now" (store.js syncNow).
+//
 // Two ways of reaching that file:
 //  - on the Mac (opened through serve.py): the server does it with git and the login git already has —
 //    nothing to set up (serve.py, GITSYNC);
@@ -16,7 +19,6 @@
 const KEY = 'ielts-cbt.github';
 const API = 'https://api.github.com';
 const BRANCH = 'progress-sync', PATH = 'test-centre.json';
-const ROUTINE = 5 * 60e3;      // every write is a commit: routine saves are spaced out, results go at once
 
 export function githubConfig() {
   try { const c = JSON.parse(localStorage.getItem(KEY)); return c?.token && c?.repo ? c : null; } catch { return null; }
@@ -122,7 +124,7 @@ const viaServer = () => {
 export function makeGitHubSync({ get, merge, onStatus, device = '', server = false }) {
   let cfg = githubConfig();
   let way = cfg ? viaToken(cfg) : server ? viaServer() : null;
-  let sha = null, timer = null, message = null, busy = null, online = false, last = null, error = '';
+  let sha = null, waiting = false, message = null, busy = null, online = false, last = null, error = '';
   const note = (ok, err = '') => { online = ok; error = err; if (ok) last = Date.now(); onStatus?.(); };
   const failed = (e) => note(false, e.quiet ? '' : e.message);
 
@@ -134,7 +136,7 @@ export function makeGitHubSync({ get, merge, onStatus, device = '', server = fal
   }
 
   async function write() {
-    timer = null;
+    waiting = false;
     const msg = message; message = null;
     try {
       for (let tries = 0; tries < 5; tries++) {
@@ -144,7 +146,7 @@ export function makeGitHubSync({ get, merge, onStatus, device = '', server = fal
         return note(true);
       }
       throw new Error('GitHub kept refusing the save — try again in a minute');
-    } catch (e) { message = message || msg; failed(e); }
+    } catch (e) { message = message || msg; waiting = true; failed(e); }
   }
   const run = () => (busy = (busy || Promise.resolve()).then(write));
 
@@ -155,26 +157,24 @@ export function makeGitHubSync({ get, merge, onStatus, device = '', server = fal
         const first = !sha;
         const more = await read();
         note(true);
-        if (more) this.push(first && !sha ? 'Progress, first copy' : undefined);      // nothing there yet: start it at once
+        if (more) this.push(first && !sha ? 'Progress, first copy' : undefined);      // noted; sent on "Exchange now"
         return true;
       } catch (e) { failed(e); return false; }
     },
-    /** Queue a save; with a message (a finished test) it goes at once. */
+    /** Note that there is something to send (with a message: a finished test). Nothing is sent here. */
     push(commitMessage) {
       if (!way) return;
       if (commitMessage) message = commitMessage;
-      if (timer && !commitMessage) return;          // a routine save is already waiting
-      clearTimeout(timer);
-      timer = setTimeout(run, commitMessage ? 0 : ROUTINE);
+      waiting = true;
     },
-    flush() { if (way && timer) { clearTimeout(timer); return run(); } return busy || Promise.resolve(); },
+    /** Send what is waiting - only ever called when you ask for it ("Exchange now"). */
+    flush() { if (way && waiting) return run(); return busy || Promise.resolve(); },
     /** `via`: 'token' (the GitHub API), 'git' (through serve.py on the Mac) or '' (not in use). */
-    status: () => ({ on: !!way, via: cfg ? 'token' : way ? 'git' : '', repo: way?.repo || '', online, last, error, pending: !!timer }),
+    status: () => ({ on: !!way, via: cfg ? 'token' : way ? 'git' : '', repo: way?.repo || '', online, last, error, pending: waiting }),
     /** Start using (or, with null, stop using) a token and repository; see checkGithub(). */
     configure(c) {
       cfg = c; way = c ? viaToken(c) : server ? viaServer() : null;
-      sha = null; online = false; error = ''; last = null;
-      clearTimeout(timer); timer = null;
+      sha = null; online = false; error = ''; last = null; waiting = false;
       if (c) localStorage.setItem(KEY, JSON.stringify(c)); else localStorage.removeItem(KEY);
       onStatus?.();
     },
