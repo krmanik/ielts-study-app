@@ -1,0 +1,31 @@
+<!doctype html>
+<!-- Developer aid: open one part of a test straight in the exam screen, without the menus.
+     /cbt/tools/preview.html?t=21-1&s=R&p=1          t = test, s = L|R|W, p = parts (1,2,3)
+     &review=1 shows the marked review screen, &answers={"1":"x"} pre-fills answers, &q=5 jumps to a question. -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <base href="../">
+  <title>Preview</title>
+  <link rel="stylesheet" href="css/cbt.css">
+</head>
+<body>
+  <div id="app"></div>
+  <div id="toast" hidden></div>
+  <div id="modal" hidden></div>
+  <script type="module">
+    const q = new URLSearchParams(location.search);
+    const { loadIndex } = await import('./js/data.js');
+    const store = await import('./js/store.js');
+    await loadIndex();
+    const a = store.newAttempt({ test: q.get('t') || '21-1', skill: q.get('s') || 'R', parts: (q.get('p') || '1').split(',').map(Number),
+      mode: q.get('mode') || 'practice', limit: +(q.get('limit') || 3600) });
+    a.started = Date.now(); a.phase = 'run';
+    if (q.get('answers')) Object.assign(a.answers, JSON.parse(q.get('answers')));
+    if (q.get('review')) a.finished = Date.now();
+    const exam = await import('./js/exam.js');
+    await exam.renderExam(document.querySelector('#app'), a.id, { review: !!q.get('review') });
+    if (q.get('q')) document.querySelector(`.num[data-q="${q.get('q')}"]`)?.click();
+  </script>
+</body>
+</html>

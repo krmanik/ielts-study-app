@@ -1,0 +1,46 @@
+<!doctype html>
+<!-- Developer aid: one part of a test laid out in full (no scrolling panes) beside the book pages it was read from,
+     to compare the screen with the print.
+     /cbt/tools/audit.html?t=21-1&s=R&p=1          t = test, s = L|R, p = part       &script=1 adds the transcript (L) -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <base href="../">
+  <title>Audit</title>
+  <link rel="stylesheet" href="css/cbt.css">
+  <style>
+    body { background: #fff; }
+    .audit { display: grid; grid-template-columns: 620px 1fr; gap: 18px; align-items: start; padding: 10px; }
+    .audit .scan img { display: block; width: 100%; border: 1px solid #bbb; margin-bottom: 8px; }
+    .audit .scan small { display: block; font: 11px/1.4 monospace; color: #666; }
+    .audit .screen.exam { position: static; display: block; font-size: 16px; }   /* the exam's colours, not its fixed full-screen frame */
+    .audit .screen .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
+    .audit .screen .cols.one { grid-template-columns: 1fr; }
+    .audit h1 { font: 700 14px/1.4 monospace; margin: 0 0 8px; grid-column: 1 / -1; }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <script type="module">
+    const q = new URLSearchParams(location.search);
+    const { loadIndex, loadTest } = await import('./js/data.js');
+    const { partQuestionsHtml } = await import('./js/qrender.js');
+    const { passageHtml, scriptHtml } = await import('./js/text.js');
+    await loadIndex();
+    const T = await loadTest(q.get('t') || '21-1');
+    const sk = q.get('s') || 'R';
+    const p = T[sk].parts.find((x) => x.n === +(q.get('p') || 1));
+    const ctx = { answers: {}, flags: {}, review: false, key: T.key[sk], right: {} };
+    const pages = [...p.pages, ...(q.get('script') ? p.scriptPages || [] : [])];
+    const left = sk === 'R' ? `<article class="passage">${passageHtml(p)}</article>`
+      : q.get('script') ? `<div class="script-pane">${scriptHtml(p)}</div>` : '';
+    document.querySelector('#app').innerHTML = `<div class="audit">
+      <h1>${T.id} ${sk}${p.n} · book pages ${pages.join(', ')}</h1>
+      <div class="scan">${pages.map((n) => `<small>page ${n}</small><img src="pages/${T.book}/${n}.jpg">`).join('')}</div>
+      <div class="screen exam"><div class="cols${left ? '' : ' one'}">${left ? `<div>${left}</div>` : ''}<div class="qpanel">${partQuestionsHtml(p, T, ctx)}</div></div></div>
+    </div>`;
+    await Promise.all([...document.images].map((i) => i.complete ? 0 : new Promise((r) => { i.onload = i.onerror = r; })));
+    document.title = 'ready';
+  </script>
+</body>
+</html>

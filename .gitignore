@@ -1,0 +1,35 @@
+# Source books and audio (large, copyrighted) — keep them next to the app, not in git
+/Cambridge IELTS 11-21/
+/The Official Cambridge Guide to IELTS (Full Ebook+Audio)/
+
+# Page images rendered from the PDFs (regenerate with tools/render_pages.py and cbt/tools/render.py)
+/app/pages/
+/app/cbt/pages/
+
+# Build leftovers
+__pycache__/
+*.pyc
+/app/cbt/tools/vocr
+.DS_Store
+._*
+
+# Recordings joined from split source files (cbt/tools/build.py)
+/app/cbt/media/
+
+# Environment of the layout OCR model (cbt/tools/vl.py) and its server log
+/.venv-ocr/
+/app/cbt/tools/cache/vl-server.log
+
+# Phone access (serve.py --phone): the code a phone gives once, and the downloaded HTTPS certificate
+/app/.phone-key
+/app/.cert/
+
+# The phone app gathered for a static host (app/cbt/tools/static_site.py); published from there, never from main
+/site/
+
+# Writing source books (copyrighted) and built Anki decks (made by writing/make_*.py, also in CI)
+/writing/*.pdf
+/writing/*.apkg
+
+# Anki decks built by writing/build.py (also by the publish workflow)
+/app/cbt/decks/

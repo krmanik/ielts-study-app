@@ -1,0 +1,232 @@
+/* IELTS Test Centre on a phone (m.html). Loaded after cbt.css: the pages around the test are laid out
+   for one hand, and the test screen itself is fitted to a narrow display. */
+
+html.m { -webkit-text-size-adjust: 100%; }
+html.m body { font-size: 16px; -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; }
+html.m a:hover { text-decoration: none; }
+:root { --sk-l: #1f5fbf; --sk-r: #1d7f4e; --sk-w: #9a6200; --sk-s: #7a3fb0; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --sk-l: #6ea3ff; --sk-r: #4cc38a; --sk-w: #e3b34f; --sk-s: #c39bf0; } }
+:root[data-theme="dark"] { --sk-l: #6ea3ff; --sk-r: #4cc38a; --sk-w: #e3b34f; --sk-s: #c39bf0; }
+
+/* ---------- pages and the tab bar ---------- */
+.m-page { max-width: 640px; padding: calc(18px + env(safe-area-inset-top)) 16px calc(88px + env(safe-area-inset-bottom)); }
+.m-tabs { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr;
+  background: var(--surface); border-top: 1px solid var(--line); padding-bottom: env(safe-area-inset-bottom); }
+.m-tabs a { display: grid; justify-items: center; gap: 3px; padding: 9px 0 7px; font-size: 11px; font-weight: 600; color: var(--ink-3); }
+.m-tabs a.active { color: var(--accent); }
+.m-tabs svg { width: 24px; height: 24px; }
+
+.m-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+.m-top h1 { margin: 0; font-size: 28px; letter-spacing: -.3px; }
+.m-h { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; color: var(--ink-3); margin: 26px 2px 10px; }
+.m-note { color: var(--ink-3); font-size: 13.5px; margin: 10px 2px 0; }
+.m-note.warn { color: var(--warn); margin: 0 2px 8px; }
+.m-page .back { font-size: 16px; padding: 4px 0; margin-bottom: 6px; }
+.btn.block { display: flex; justify-content: center; width: 100%; padding: 13px 16px; font-size: 16px; white-space: normal; text-align: center; }
+.m-page .btn { min-height: 44px; justify-content: center; }
+.m-page .btn.small { min-height: 36px; }
+.row.between { justify-content: space-between; }
+.m-stack > * + * { margin-top: 14px; }
+
+/* where the progress is */
+.m-chip { display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 600; color: var(--ink-2); background: var(--surface); border: 1px solid var(--line); border-radius: 99px; padding: 5px 11px; white-space: nowrap; }
+.m-chip i, .m-status i { width: 9px; height: 9px; border-radius: 50%; background: var(--ink-3); flex: none; }
+.m-chip.good i, .m-status.good i { background: var(--good); }
+.m-chip.warn i, .m-status.warn i { background: var(--warn); }
+.m-status { display: flex; gap: 12px; align-items: flex-start; }
+.m-status i { margin-top: 7px; }
+.m-status span, .m-row .grow, .m-save .grow, .m-exam span { display: flex; flex-direction: column; min-width: 0; }
+.m-status small, .m-row small, .m-save small, .m-exam small { font-size: 13.5px; color: var(--ink-3); font-weight: 400; line-height: 1.4; }
+
+/* exam countdown */
+.m-exam { display: flex; align-items: center; gap: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 16px; color: var(--ink); margin-bottom: 14px; }
+.m-exam b { font-size: 34px; line-height: 1; font-variant-numeric: tabular-nums; }
+.m-exam span { font-weight: 600; flex: 1; }
+.m-exam .chev, .m-row .chev { width: 20px; height: 20px; color: var(--ink-3); flex: none; }
+
+/* the one thing to do next */
+.m-hero { display: block; width: 100%; text-align: left; border: 0; cursor: pointer; padding: 20px; font: inherit;
+  background: var(--accent); color: #fff !important; }
+:root[data-theme="dark"] .m-hero { background: #2a5cb3; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .m-hero { background: #2a5cb3; } }
+.m-hero small { color: rgba(255, 255, 255, .8); font-size: 13.5px; }
+.m-hero h2 { color: #fff; font-size: 21px; margin: 6px 0 4px; }
+.m-hero p { margin: 0 0 16px; color: rgba(255, 255, 255, .92); }
+.m-hero .go { display: inline-flex; align-items: center; gap: 6px; background: #fff; color: #1b3f8f; font-weight: 700; border-radius: 10px; padding: 11px 22px; }
+
+/* lists of things to tap */
+.m-list { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+.m-row { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 60px; padding: 10px 12px 10px 14px; border: 0; border-top: 1px solid var(--line);
+  background: transparent; color: var(--ink) !important; text-align: left; font: inherit; cursor: pointer; }
+.m-row:first-child { border-top: 0; }
+.m-row:active, .m-hero:active { filter: brightness(.96); }
+.m-row b { font-size: 16px; }
+.m-row small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.m-row .meta { font-size: 13px; color: var(--ink-3); white-space: nowrap; }
+.m-row.two { gap: 8px; cursor: default; background: var(--surface-2); }
+.m-row.two .btn { min-height: 40px; padding: 0 14px; font-size: 14px; }
+.m-row.att { padding-right: 4px; }
+.m-row.att a { color: var(--ink); }
+.m-row .icon { border: 0; background: transparent; color: var(--ink-3); width: 44px; height: 44px; font-size: 16px; }
+.card .m-row { padding-left: 0; padding-right: 0; border-top: 0; min-height: 0; }
+.m-sk { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 9px; font-weight: 800; font-size: 15px; color: #fff; flex: none; }
+.m-h .m-sk { width: 24px; height: 24px; border-radius: 6px; font-size: 12px; }
+.sk-L { background: var(--sk-l); } .sk-R { background: var(--sk-r); } .sk-W { background: var(--sk-w); } .sk-S { background: var(--sk-s); }
+:root[data-theme="dark"] .m-sk { color: #0d1117; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .m-sk { color: #0d1117; } }
+
+/* test list: the four skills of each test */
+.m-sks { display: flex; gap: 4px; flex: none; }
+.m-sks i { font-style: normal; display: grid; place-items: center; min-width: 27px; height: 25px; padding: 0 3px; border-radius: 6px; font-size: 11.5px; font-weight: 700; background: var(--surface-2); color: var(--ink-3); }
+.m-sks i.part { background: var(--warn-soft); color: var(--warn); }
+.m-sks i.done { background: var(--good-soft); color: var(--good); }
+.dl-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid var(--line-strong); margin-left: 8px; vertical-align: 2px; }
+.dl-dot.on { background: var(--good); border-color: var(--good); }
+.m-note .dl-dot { margin: 0 2px 0 0; vertical-align: 0; }
+
+/* bands */
+.m-bands { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; padding: 14px 8px; text-align: center; }
+.m-bands b { display: block; font-size: 22px; font-variant-numeric: tabular-nums; }
+.m-bands small { font-size: 11.5px; }
+.m-bands .all { border-left: 1px solid var(--line); }
+.m-bands .all b { color: var(--accent); }
+
+/* saving a test, and the list of things to do before leaving */
+.m-save { display: flex; align-items: center; gap: 12px; padding: 12px 14px; }
+.m-save.on { border-color: var(--good); }
+.m-travel ul { list-style: none; margin: 0 0 14px; padding: 0; }
+.m-travel li { display: flex; gap: 12px; padding: 8px 0; }
+.m-travel li i { flex: none; width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--line-strong); display: grid; place-items: center; font-style: normal; font-size: 13px; font-weight: 800; margin-top: 1px; }
+.m-travel li.ok i { background: var(--good); border-color: var(--good); color: #fff; }
+.m-travel li span { display: flex; flex-direction: column; font-weight: 600; }
+.m-travel li small { font-weight: 400; font-size: 13.5px; line-height: 1.4; }
+.m-travel .row { margin-top: 12px; min-height: 36px; }
+.m-travel p { margin: 0; }
+
+/* settings */
+.m-form label { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 44px; }
+.m-form label span { display: flex; flex-direction: column; font-weight: 600; }
+.m-form label small { font-weight: 400; font-size: 13px; }
+.m-form select, .m-form input { font-size: 16px; padding: 8px 10px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--surface); min-height: 42px; max-width: 58%; }
+
+/* ---------- wide screens: the same pages with room to spread; the test screen is the Mac's two panes ---------- */
+.m-tabs a.m-brand { display: none; }
+@media (min-width: 861px) {
+  .m-tabs { position: sticky; top: 0; bottom: auto; display: flex; align-items: center; gap: 4px; height: 58px;
+    padding: 0 max(24px, calc((100vw - 1120px) / 2 + 24px)); border-top: 0; border-bottom: 1px solid var(--line); }
+  .m-tabs a { display: flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 8px; font-size: 14.5px; }
+  .m-tabs a:hover { background: var(--surface-2); }
+  .m-tabs a.active { background: var(--accent-soft); }
+  .m-tabs svg { width: 20px; height: 20px; }
+  .m-tabs a.m-brand { display: flex; gap: 10px; margin-right: auto; padding-left: 0; color: var(--ink); font-size: 16px; background: none; }
+  .m-brand i { font-style: normal; background: var(--brand); color: #fff; font-weight: 800; font-size: 13px; letter-spacing: 1px; padding: 5px 7px; border-radius: 4px; }
+  .m-page { max-width: 1120px; padding: 30px 24px 70px; }
+  .m-top h1 { font-size: 30px; }
+  .m-cols { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 32px; align-items: start; }
+  .m-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 0 28px; align-items: start; }
+  .m-grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .m-cols > * > .m-h:first-child { margin-top: 4px; }
+  .m-hero { padding: 26px; }
+  .m-hero h2 { font-size: 24px; }
+  .m-row:hover { background: var(--surface-2); }
+  .card .m-row:hover { background: transparent; }
+  .m-save { max-width: 560px; }
+}
+
+/* ---------- narrow screens: pages shared with the Mac (results, progress, mistakes) ---------- */
+@media (max-width: 860px) {
+  .m-page h1 { font-size: 24px; }
+  .m-page .card { padding: 16px; }
+  .m-page .grid2 { grid-template-columns: 1fr; }
+  .m-page .grid4 { grid-template-columns: 1fr 1fr; }
+  .m-stack small.muted { display: block; line-height: 1.45; font-size: 13.5px; }
+  .m-page .card { overflow-x: auto; }
+  .m-page .m-hero, .m-page .m-bands, .m-page .m-list { overflow: hidden; }
+  .m-page .row > .btn { flex: 1 1 auto; }
+  .m-page table { font-size: 14px; }
+  .m-page img { max-width: 100%; }
+  #toast { bottom: calc(84px + env(safe-area-inset-bottom)); max-width: calc(100vw - 32px); text-align: center; }
+  body.exam-mode #toast { bottom: calc(120px + env(safe-area-inset-bottom)); }
+  #modal { padding: 12px; }
+  .dialog { max-width: 100%; width: 100%; max-height: calc(100dvh - 40px); }
+  .dialog .actions .btn { min-height: 44px; flex: 1; justify-content: center; }
+}
+
+/* ---------- narrow screens: the test screen, one pane at a time (see js/m/exam.js) ---------- */
+@media (max-width: 860px) {
+  .exam { bottom: auto; height: 100dvh; padding-top: env(safe-area-inset-top); grid-template-columns: minmax(0, 1fr); }
+  .exam > * { min-width: 0; }
+  .x-head { height: 46px; padding: 0 4px 0 8px; gap: 6px; }
+  .x-head .mark { display: none; }
+  .x-timer { margin: 0 auto 0 0; font-size: 15px; padding: 6px 8px; white-space: nowrap; }
+  .x-tools { gap: 0; }
+  .x-tools .tbtn { min-width: 42px; height: 42px; justify-content: center; padding: 0 8px; font-size: 17px; }
+  .x-banner { padding: 7px 12px; gap: 4px 10px; font-size: 14px; }
+  .x-banner .sub { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .x-audio { margin: 0; width: 100%; gap: 6px; }
+  .x-audio .prog { flex: 1; width: auto; min-width: 40px; height: 8px; }
+  .x-audio label { display: none; }                       /* volume: the phone's own buttons */
+  .x-audio .tbtn { min-width: 40px; height: 36px; border: 1px solid var(--x-line); border-radius: 8px; background: var(--x-bg); color: inherit; font-size: 14px; }
+  .x-audio select { font-size: 16px; height: 36px; }
+
+  .x-body.single { grid-template-rows: 1fr; }
+  /* text and questions share the screen: one at a time, both kept in place so neither loses its scroll position */
+  .exam.m-two .x-body { grid-template-columns: 1fr; grid-template-rows: 1fr; }
+  .exam.m-two .x-body > .x-pane { grid-area: 1 / 1; }
+  .exam.m-two .x-split { display: none; }
+  .exam.m-two[data-pane="l"] #pane-q, .exam.m-two[data-pane="q"] #pane-l { visibility: hidden; pointer-events: none; }
+  .passage, .wtask, .script-pane { padding: 16px 16px 56px; }
+  .qpanel { padding: 14px 14px 56px; }
+  .wpanel { padding: 10px 12px 52px; }
+  .x-center { padding: 18px 16px; place-items: start center; }
+  .x-center .btn { min-height: 44px; }
+
+  .exam input, .exam textarea, .exam select { font-size: max(16px, 1em); }      /* under 16px, iPhones zoom the page on focus */
+  .q { flex-wrap: wrap; gap: 8px 10px; }
+  .q .qt { flex: 1 1 0; min-width: 55%; }
+  .q input.ans { max-width: none; min-width: 0; flex: 1 1 140px; padding: 9px 10px; }
+  .opt { min-width: 44px; min-height: 40px; }
+  .mc-opt { padding-top: 9px; padding-bottom: 9px; }
+  .flag { opacity: .45; padding: 8px; }
+  .qtable-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .tf-def { grid-template-columns: 6.2em 1fr; }
+  /* choosing an option for a box: a sheet from the bottom instead of a small menu */
+  .slot-menu { position: fixed !important; left: 0 !important; right: 0; top: auto !important; bottom: 0; width: auto !important; max-width: none !important; max-height: 62dvh; overflow-y: auto;
+    border-radius: 16px 16px 0 0 !important; padding: 8px 8px calc(8px + env(safe-area-inset-bottom)) !important; box-shadow: 0 -10px 40px rgba(0, 0, 0, .3) !important; }
+  .slot-menu button { min-height: 46px; }
+
+  .x-foot { flex-direction: column; min-height: 0; padding-bottom: env(safe-area-inset-bottom); }
+  .x-parts { flex: none; min-height: 46px; scrollbar-width: none; }
+  .x-parts::-webkit-scrollbar { display: none; }
+  .x-part { padding: 0 10px; }
+  .x-part .nums { gap: 4px; }
+  .x-part .num { width: 33px; height: 33px; font-size: 13px; flex: none; }
+  .x-nav { justify-content: flex-end; gap: 6px; padding: 6px 8px; min-height: 54px; border-top: 1px solid var(--x-line); }
+  .x-nav button { width: 44px; height: 42px; }
+  .x-nav .submit { padding: 0 12px; }
+  .x-nav .review-chk { display: none; }
+  .m-toggle { position: absolute; left: 8px; bottom: calc(6px + env(safe-area-inset-bottom)); height: 42px; display: flex; z-index: 3;
+    border: 1.5px solid var(--x-active); border-radius: 9px; overflow: hidden; background: var(--x-bg); }
+  .m-toggle[hidden] { display: none; }
+  .m-toggle button { border: 0; background: transparent; color: var(--x-active); padding: 0 11px; font-weight: 700; font-size: 14px; }
+  .m-toggle button.on { background: var(--x-active); color: #fff; }
+  .exam[data-contrast="yob"] .m-toggle button.on { color: #000; }
+  /* keyboard up: the footer makes way, the switch stays within reach just above the keys */
+  .exam.kb .x-foot { display: none; }
+  .exam.kb .x-banner .sub { display: none; }
+  .exam.kb .m-toggle { bottom: 6px; box-shadow: 0 2px 10px rgba(0, 0, 0, .25); }
+}
+
+/* served as plain files: the scans of whole book pages are left out (only the pictures the questions need are there) */
+html[data-host="static"] .orig { display: none; }
+
+/* GitHub connection */
+.m-gh input { width: 100%; font-size: 16px; padding: 10px 12px; border: 1px solid var(--line-strong); border-radius: 8px; background: var(--surface); min-height: 44px; }
+.m-gh label { display: block; font-weight: 600; font-size: 14px; }
+.m-gh label input { margin-top: 5px; font-weight: 400; }
+.m-gh ol { margin: 0; padding-left: 20px; font-size: 13.5px; color: var(--ink-2); line-height: 1.5; }
+.m-gh details summary { font-weight: 600; color: var(--accent); cursor: pointer; min-height: 32px; }
+
+/* speaking */
+.spanel { padding: 16px; }
+.spanel label.row { flex-wrap: nowrap; align-items: flex-start; }

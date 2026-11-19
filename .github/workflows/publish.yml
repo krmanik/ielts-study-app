@@ -1,0 +1,83 @@
+# Test, build the Anki decks and the Learn data, and refresh the app code on GitHub Pages.
+#
+# The recordings and page pictures are not in git, so this cannot build the whole site: it puts the
+# changed code, test text and decks on top of what app/cbt/tools/static_site.py --publish last sent
+# from the Mac, and leaves the media there alone. See README.md, "Publish".
+name: Publish
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'app/**'
+      - 'writing/**'
+      - '.github/workflows/publish.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install genanki
+        run: pip install genanki==0.13.1
+
+      - name: Build decks and learn.json
+        run: python writing/build.py
+
+      - name: Unit tests
+        run: |
+          node --test app/tests/*.test.mjs
+          python -m unittest discover -s writing -p 'test_*.py'
+
+      - name: Is there a site to update?
+        id: site
+        run: |
+          if git ls-remote --exit-code --heads origin gh-pages >/dev/null; then echo "exists=true" >> "$GITHUB_OUTPUT";
+          else echo "::warning::No gh-pages branch yet: publish once from the Mac (app/cbt/tools/static_site.py --publish)."; echo "exists=false" >> "$GITHUB_OUTPUT"; fi
+
+      - uses: actions/checkout@v4
+        if: steps.site.outputs.exists == 'true'
+        with:
+          ref: gh-pages
+          path: site
+          fetch-depth: 1
+
+      - name: Copy the code onto the site
+        if: steps.site.outputs.exists == 'true'
+        run: python app/cbt/tools/static_site.py --code-into site
+
+      - name: Push
+        if: steps.site.outputs.exists == 'true'
+        working-directory: site
+        run: |
+          git add -A
+          if git diff --cached --quiet; then echo "Nothing changed on the site."; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -q -m "App code from ${GITHUB_SHA::7}"
+          git push origin HEAD:gh-pages
+
+      - name: Keep the decks with the run
+        uses: actions/upload-artifact@v4
+        with:
+          name: anki-decks
+          path: app/cbt/decks/*.apkg
+          retention-days: 30

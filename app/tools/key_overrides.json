@@ -1,0 +1,218 @@
+{
+ "_note": "Manual corrections to OCR-parsed answer keys, verified against book pages 387-396. Pairs 'q&q' are 'in either order'.",
+ "t1": {
+  "listening": {
+   "10": "taking/take photos/photographs",
+   "22": "A",
+   "27": "(senior) management/managers",
+   "7": "M-A-U-G-H-A-N",
+   "14": "(water) fountain"
+  },
+  "reading": {
+   "1": "road",
+   "21": "airlines",
+   "22": "competitive advantage",
+   "26": "flights",
+   "35": "B"
+  }
+ },
+ "t2": {
+  "listening": {
+   "13": "(at) noon/midday/12 o'clock/12 pm",
+   "21&22": "D B",
+   "39": "repeat it"
+  },
+  "reading": {
+   "14": "v",
+   "31": "NO",
+   "33": "(some) directions",
+   "37&38": "A C",
+   "39&40": "B E"
+  }
+ },
+ "t3": {
+  "listening": {
+   "8": "fitness level",
+   "11": "C",
+   "15": "C",
+   "17": "A",
+   "18": "ring a bell",
+   "20": "speeches/speakers",
+   "35": "products"
+  },
+  "reading": {
+   "33": "(their) behavio(u)r/activities"
+  }
+ },
+ "t4": {
+  "listening": {
+   "1": "7.30/seven thirty",
+   "11&12": "B E",
+   "13&14": "B C",
+   "15": "G",
+   "16": "I",
+   "27": "A",
+   "30": "E"
+  },
+  "reading": {
+   "6": "FALSE",
+   "13": "A",
+   "27": "E",
+   "32": "B",
+   "33&34": "C D",
+   "35&36": "B C"
+  }
+ },
+ "t5": {
+  "listening": {
+   "5": "13th May/13 May/thirteenth May/May 13/May 13th/May thirteenth",
+   "11": "G",
+   "12": "D",
+   "13": "A",
+   "14": "E",
+   "15": "C",
+   "16": "B",
+   "17": "A",
+   "18": "C",
+   "19": "C",
+   "20": "A",
+   "21": "B",
+   "22": "A",
+   "23": "A",
+   "24": "C",
+   "25": "B",
+   "26": "E",
+   "27": "B",
+   "28": "G",
+   "29": "A",
+   "30": "F"
+  },
+  "reading": {
+   "1": "vi",
+   "2": "x",
+   "3": "ii",
+   "4": "ix",
+   "5": "iv",
+   "6": "i",
+   "7": "vii",
+   "8": "North America",
+   "9": "(super-hot) fires",
+   "10": "(stored) carbon",
+   "11": "winds",
+   "12": "drought",
+   "13": "beetle",
+   "27": "B",
+   "28": "A",
+   "29": "B",
+   "30": "D",
+   "31": "C",
+   "32": "D",
+   "33": "B",
+   "34": "C",
+   "35": "A",
+   "36": "H",
+   "37": "D",
+   "38": "F",
+   "39": "G",
+   "40": "B"
+  }
+ },
+ "t6": {
+  "reading": {
+   "6": "ii",
+   "12": "Master's degree/Masters degree",
+   "14": "F",
+   "15": "E",
+   "16": "A",
+   "17": "E",
+   "18": "B",
+   "19&20": "A C",
+   "21&22": "A D",
+   "31": "B"
+  }
+ },
+ "t7": {
+  "listening": {
+   "2": "noisy",
+   "7": "S-H-A-D-F-O-R-T-H/S-h-a-d-f-o-r-t-h",
+   "11": "B",
+   "12": "A",
+   "13": "C",
+   "14": "B",
+   "15": "A",
+   "16": "A",
+   "17": "E",
+   "18": "C",
+   "19": "F",
+   "20": "A",
+   "22": "B"
+  },
+  "reading": {
+   "1": "TRUE",
+   "2": "FALSE",
+   "3": "NOT GIVEN",
+   "4": "NOT GIVEN",
+   "5": "TRUE",
+   "6": "FALSE",
+   "7": "TRUE",
+   "8": "D",
+   "9": "B",
+   "10": "G",
+   "11": "C",
+   "12": "E",
+   "13": "F",
+   "14": "(the) hairs",
+   "17": "water",
+   "21": "B",
+   "24": "I",
+   "27": "i",
+   "28": "x",
+   "31": "iii",
+   "32": "v",
+   "39&40": "A E"
+  }
+ },
+ "t8": {
+  "listening": {
+   "8": "(the) 14(th)/fourteen(th) (of) May/May (the) 14(th)/fourteen(th)/14.(0)5/(0)5.14",
+   "11": "C",
+   "12": "B",
+   "13": "A",
+   "14": "H",
+   "15": "G",
+   "22": "I"
+  },
+  "reading": {
+   "1": "seafaring",
+   "2": "merchant",
+   "3": "temple",
+   "4": "craftsmen",
+   "5": "timber/wood/cedar",
+   "6": "partnership",
+   "7": "ivory",
+   "8": "commission",
+   "13": "NOT GIVEN",
+   "17": "i"
+  }
+ },
+ "gtA": {
+  "reading": {
+   "1": "E",
+   "2": "B",
+   "3": "A",
+   "4": "F",
+   "5": "C",
+   "6": "A",
+   "7": "C",
+   "21": "aim"
+  }
+ },
+ "gtB": {
+  "reading": {
+   "7": "E",
+   "31": "vii",
+   "32": "i",
+   "33": "x"
+  }
+ }
+}

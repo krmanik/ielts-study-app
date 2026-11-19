@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IELTS Study Suite</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%232f6fdb'/><text x='16' y='22' font-size='16' text-anchor='middle' fill='white' font-family='system-ui' font-weight='700'>IE</text></svg>">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <div id="shell">
+    <aside id="sidebar">
+      <div class="brand">
+        <span class="logo">IE</span>
+        <div><b>IELTS Study Suite</b><small>Official Cambridge Guide</small></div>
+      </div>
+      <nav id="nav">
+        <a href="#/" data-nav="home"><i data-icon="house"></i>Today</a>
+        <a href="#/learn" data-nav="learn"><i data-icon="graduation-cap"></i>Study path</a>
+        <a href="#/tests" data-nav="tests"><i data-icon="clock"></i>Practice tests</a>
+        <a href="#/cbt" data-nav="cbt"><i data-icon="layout-grid"></i>Test Centre (Cambridge 11–21)</a>
+        <a href="#/cbt/learn" data-nav="cbt-learn"><i data-icon="pen-line"></i>Writing &amp; Speaking models</a>
+        <a href="#/audio" data-nav="audio"><i data-icon="headphones"></i>Audio tracks</a>
+        <a href="#/vocab" data-nav="vocab"><i data-icon="book"></i>Vocabulary</a>
+        <a href="#/mistakes" data-nav="mistakes"><i data-icon="notebook-pen"></i>Mistake log</a>
+        <a href="#/notes" data-nav="notes"><i data-icon="bookmark"></i>Notes &amp; bookmarks</a>
+        <a href="#/search" data-nav="search"><i data-icon="search"></i>Search book</a>
+        <a href="#/book" data-nav="book"><i data-icon="book-open"></i>Whole book</a>
+        <a href="#/settings" data-nav="settings"><i data-icon="settings"></i>Settings</a>
+      </nav>
+      <div id="side-foot"></div>
+    </aside>
+    <div id="scrim" data-action="close-nav"></div>
+    <main id="main">
+      <header id="topbar">
+        <button class="icon-btn" id="menu-btn" data-action="toggle-nav" aria-label="Menu" data-icon="menu"></button>
+        <div id="crumbs"></div>
+        <div id="top-actions"></div>
+      </header>
+      <div id="view"></div>
+    </main>
+  </div>
+  <div id="player" hidden></div>
+  <div id="toast" hidden></div>
+  <div id="modal" hidden></div>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

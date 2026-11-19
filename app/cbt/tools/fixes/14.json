@@ -1,0 +1,52 @@
+{
+ "24": [
+  [
+   "<",
+   "afternoon tea in the conservatory.",
+   "A"
+  ],
+  [
+   "the hans to mat to eates ow",
+   "B the chance to meet the castle's owners."
+  ],
+  [
+   "-",
+   "=NEP"
+  ],
+  [
+   "-",
+   "=A#-1"
+  ],
+  [
+   "=Staircase.",
+   "C a photograph together on the Great Staircase."
+  ]
+ ],
+ "26": [
+  [
+   "!",
+   "became isolated on the island",
+   0.015
+  ],
+  [
+   "became isolated on the island",
+   "became isolated on the island."
+  ],
+  [
+   "<",
+   "became isolated on the island.",
+   "A"
+  ],
+  [
+   "+",
+   "became isolated on the island.",
+   "B spread from the island to other areas.",
+   0.022
+  ],
+  [
+   "<",
+   "coexisted with other animals on the island.",
+   "C"
+  ]
+ ]
+}
